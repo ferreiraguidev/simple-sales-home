@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>This page is not Redirecting</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/materialize\css\materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/materialize.min.css" media="screen,projection"/>
+</head>
+
+<body>
+
+<nav>
+    <a href="/customerRegistration"></a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="/customerRegistration">Customers</a>
+    </ul>
+</nav>
+<br/>
+<br/>
+<br/>
+
+<div class="container" style="align-content: left">
+    <div class="card">
+        <div th:each="p :${customerObj}">
+            <div class="row">
+                <p style="text">ID: <span th:text="${p.id}"></span></p>
+                <p>Nome: <span th:text="${p.name}"></span></p>
+                <p>Contato: <span th:text="${p.contact}"></span></p>
+                <p>Placa: <span th:text="${p.registration}"></span></p>
+                <p>Carro: <span th:text="${p.car}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br/>
+<br/>
+<div class="container" style="align-content: left">
+    <div class="card">
+        <h5>Adicionar Novo Serviço</h5>
+        <br/>
+        <div class="row">
+            <form th:action="@{/addService/{customerId}(customerId=${customerObj.id})}"
+                  method="post" class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label class="active" for="haushalt">Orçamento</label>
+                        <input id="haushalt" name="haushalt" class="validate">
+                    </div>
+                </div>
+                <div class="input-field col s4">
+                    <label class="active" for="date">Data</label>
+                    <br/>
+                    <input type="input-group-text" id="date" name="date" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <label class="active" for="price">Valor Final</label>
+                    <br/>
+                    <input style="width: 350px" type="input-group-text" id="price" name="price"
+                           class="validate">
+                </div>
+                <br/>
+                <input type="submit" value="Salvar Serviço" class="waves-effect waves-light btn">
+                <br/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br/>
+<br/>
+<div class="container" style="align-content: left">
+    <div class="card">
+        <table class="striped">
+            <tr th:each="service: ${servicos}">
+                <td th:text="${service.date}"></td>
+                <td th:text="${service.haushalt}"></td>
+                <td th:text="${service.price}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

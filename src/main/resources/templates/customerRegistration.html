@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>didnt work perfectly before</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/materialize\css\materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/materialize.min.css" media="screen,projection"/>
+
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <a href="/home">HOME PAGE</a>
+        </ul>
+    </div>
+</nav>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="container" style="width: 800 px;">
+    <div class="card mt-3">
+        <form class="card-body" action="/saveCustomer" method="post" th:object="${customerObj}">
+
+            <div class="form-group">
+                <div>
+                    <label>Contato - Whatsapp</label>
+                </div>
+                <input type="input-group-text" name="car" th:field="*{car}" style="width: 450px">
+            </div>
+            <br/>
+            <div class="form-group">
+                <div>
+                    <label>Nome</label>
+                </div>
+                <input type="input-group-text" name="name" th:field="*{name}" style="width: 450px">
+            </div>
+            <br/>
+            <div class="form-group">
+                <div>
+                    <label>De onde é</label>
+                </div>
+                <input type="input-group-text" name="contact" th:field="*{contact}" style="width: 450px">
+            </div>
+            <br/>
+            <div class="form-group">
+                <div>
+                    <label>Última compra</label>
+                </div>
+                <input type="input-group-text" name="registration" th:field="*{registration}" style="width: 850px">
+            </div>
+            <br/>
+            <br/>
+            <input class="waves-effect waves-light btn" type="submit" value="Save New Customer">
+        </form>
+    </div>
+</div>
+
+
+<br/>
+<br/>
+<div class="container" style="align-content: left">
+    <div class="row">
+        <div class="form-group">
+            <form action="searchCustomer" method="post">
+                <input name="searchByName" style="width: 450px" type="input-group-text">
+                <input class="waves-effect waves-light btn" type="submit" value="Search Customer"/>
+                <a class="waves-effect waves-light btn" href="/listCustomers">List Customers</a>
+            </form>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<div class="container" style="align-content: left">
+    <div class="card mt-3">
+        <form class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Contato</th>
+                    <th>Carro</th>
+                    <th>Placa</th>
+
+                </tr>
+                </thead>
+
+                <tbody th:each="customer: ${customers}">
+
+                <th><a th:href="@{/services/{customerId}(customerId=${customer.id})}"><span
+                        th:text="${customer.name}"></span></a></th>
+
+                <th style="color: gray" th:text="${customer.contact}"></th>
+                <th style="color: gray" th:text="${customer.car}"></th>
+                <th style="color: gray" th:text="${customer.registration}"></th>
+
+                <th><a class="list-group-item"
+                        th:href="@{/editCustomer/{customerId}(customerId=${customer.id})}">Editar</a>
+                </th>
+                <th><a class="list-group-item"
+                       th:href="@{/deleteCustomer/{customerId}(customerId=${customer.id})}">Deletar</a></th>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+
+<br/>
+<br/>
+<br/>
+
+<script type="text/javascript" src="materialize/js/materialize.js"></script>
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>
